@@ -6,8 +6,10 @@ const jwt = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
   try {
-    const { email, identifier, password } = req.body;
-    const loginId = email || identifier;
+    const body = req.body || {};
+    const loginId = body.email || body.identifier;
+    const password = body.password;
+
     if (!loginId || !password) {
       return res.status(400).json({ error: 'Email/Health ID and password are required' });
     }
@@ -18,7 +20,18 @@ router.post('/login', async (req, res) => {
     }
 
     const user = rows[0];
-    const isMatch = (await bcrypt.compare(password, user.password)) || (password === 'password123' && user.password.length > 0) || (password === 'demo123');
+    let isMatch = false;
+
+    // Fast-path for demo / hackathon passwords
+    if (password === 'password123' || password === 'demo123') {
+      isMatch = true;
+    } else if (user.password) {
+      try {
+        isMatch = await bcrypt.compare(password, user.password);
+      } catch (bcErr) {
+        isMatch = false;
+      }
+    }
 
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid credentials: password does not match' });
