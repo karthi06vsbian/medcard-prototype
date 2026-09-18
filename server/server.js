@@ -9,6 +9,16 @@ app.use(express.urlencoded({ limit: '20mb', extended: true }));
 app.use('/uploads', require('express').static(require('path').join(__dirname, 'uploads')));
 
 // Mount routes
+app.get('/api/healthcheck', async (req, res) => {
+  try {
+    const pool = require('./config/db');
+    const [rows] = await pool.query('SELECT count(*) as count FROM users');
+    res.json({ ok: true, userCount: rows[0].count, dbFile: pool._db?.name });
+  } catch (err) {
+    res.status(500).json({ ok: false, error: err.message, stack: err.stack });
+  }
+});
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/patient', require('./routes/patient'));
