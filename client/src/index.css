@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #0B5ED7;
+  --secondary-teal: #0F9D8A;
+  --accent-cyan: #06B6D4;
+  --bg-main: #F5F9FF;
+  --bg-card: #FFFFFF;
+  --text-primary: #172B4D;
+  --text-secondary: #64748B;
+  --success: #16A34A;
+  --warning: #F59E0B;
+  --error: #DC2626;
+}
+
+body {
+  background-color: #F5F9FF;
+  color: #172B4D;
+  @apply antialiased;
+}
+

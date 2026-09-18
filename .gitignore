@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment Variables & Sensitive Keys
+.env
+*.env
+server/.env
+client/.env
+
+# Build artifacts
+dist/
+client/dist/
+build/
+
+# System & temporary files
+.DS_Store
+*.log
+*.tmp
+*.db-shm
+*.db-wal
+
+# Large root media files
+/Ch22_nonPBR.fbx
+/IMG_0625.MOV
