@@ -4,8 +4,19 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ limit: '20mb', extended: true }));
+// Safe body parsing for both standalone Express and Vercel serverless runtime
+app.use((req, res, next) => {
+  if (req.body && typeof req.body === 'object' && Object.keys(req.body).length > 0) {
+    return next();
+  }
+  express.json({ limit: '20mb' })(req, res, next);
+});
+app.use((req, res, next) => {
+  if (req.body && typeof req.body === 'object' && Object.keys(req.body).length > 0) {
+    return next();
+  }
+  express.urlencoded({ limit: '20mb', extended: true })(req, res, next);
+});
 app.use('/uploads', require('express').static(require('path').join(__dirname, 'uploads')));
 
 // Mount routes
