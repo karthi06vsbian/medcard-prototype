@@ -31,9 +31,7 @@ export default function PatientLogin() {
     <div className="min-h-screen bg-[#F5F9FF] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center mb-3">
-          <div className="p-3 bg-primary-50 rounded-2xl border border-primary-100 shadow-xs">
-            <Heart className="h-8 w-8 text-primary-600" />
-          </div>
+          <img src="/medicard-icon.png" alt="MediCard" className="w-14 h-14 rounded-2xl shadow-sm border border-slate-100 object-contain" />
         </div>
         <div className="text-center">
           <span className="text-xs font-bold text-primary-600 uppercase tracking-widest">MediCard</span>

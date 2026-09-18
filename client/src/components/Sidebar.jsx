@@ -126,9 +126,7 @@ const Sidebar = ({ role }) => {
       `}>
         <div className="p-5 flex items-center justify-between border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary-50 rounded-xl text-primary-600 border border-primary-100">
-              <Activity size={22} />
-            </div>
+            <img src="/medicard-icon.png" alt="MediCard" className="w-10 h-10 rounded-xl object-contain shadow-xs border border-slate-100" />
             <div>
               <span className="text-lg font-bold text-darknavy tracking-tight block">MediCard</span>
               <span className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">{roleStyles.roleLabel}</span>

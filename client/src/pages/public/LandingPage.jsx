@@ -23,9 +23,9 @@ export default function LandingPage() {
       <nav className="bg-white shadow-sm border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center">
-              <Heart className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-2xl font-bold text-[#172B4D]">MediCard</span>
+            <div className="flex items-center gap-2.5">
+              <img src="/medicard-icon.png" alt="MediCard Logo" className="h-9 w-9 rounded-xl object-contain shadow-xs" />
+              <span className="text-2xl font-bold text-[#172B4D] tracking-tight">MediCard</span>
             </div>
             <div>
               <Link
@@ -163,9 +163,9 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center mb-4 md:mb-0">
-            <Heart className="h-6 w-6 text-primary-600" />
-            <span className="ml-2 text-xl font-bold text-[#172B4D]">MediCard</span>
+          <div className="flex items-center gap-2 mb-4 md:mb-0">
+            <img src="/medicard-icon.png" alt="MediCard Logo" className="h-7 w-7 rounded-lg object-contain" />
+            <span className="text-xl font-bold text-[#172B4D]">MediCard</span>
           </div>
           <p className="text-[#64748B] text-sm">© 2024 MediCard. Built for Smart India Hackathon.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
