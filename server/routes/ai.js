@@ -54,7 +54,8 @@ router.use(verifyToken);
  */
 router.post('/chat', async (req, res) => {
   try {
-    const { patientId, patient_id, health_id, message, language = 'en', duration_days = 1 } = req.body;
+    const body = req.body || {};
+    const { patientId, patient_id, health_id, message, language = 'en', duration_days = 1 } = body;
     const targetPatientId = patientId || patient_id || health_id;
     const requestedLang = (language && (language.toLowerCase() === 'ta' || language.toLowerCase().startsWith('ta'))) ? 'ta' : 'en';
 
