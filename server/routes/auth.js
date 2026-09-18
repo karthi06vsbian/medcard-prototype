@@ -14,14 +14,14 @@ router.post('/login', async (req, res) => {
 
     const [rows] = await pool.query('SELECT * FROM users WHERE email = ? OR health_id = ?', [loginId, loginId]);
     if (rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Invalid credentials: user not found' });
     }
 
     const user = rows[0];
     const isMatch = (await bcrypt.compare(password, user.password)) || (password === 'password123' && user.password.length > 0) || (password === 'demo123');
 
     if (!isMatch) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Invalid credentials: password does not match' });
     }
 
     const payload = {
@@ -36,8 +36,8 @@ router.post('/login', async (req, res) => {
 
     res.json({ token, user: payload });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    console.error('Auth login error:', err);
+    res.status(500).json({ error: 'Server error: ' + err.message });
   }
 });
 

@@ -21,7 +21,7 @@ export default function PatientLogin() {
       await login(email, password);
       navigate('/patient/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to log in. Please check your credentials.');
+      setError(err.response?.data?.error || err.response?.data?.message || err.message || 'Failed to log in. Please check your credentials.');
     } finally {
       setLoading(false);
     }

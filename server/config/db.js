@@ -36,10 +36,18 @@ if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NO
 
 const db = new Database(dbPath);
 
-// Enable WAL mode for better performance
+// Serverless-safe pragma (avoid POSIX shm lock failures on AWS Lambda / Vercel)
+const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NOW_REGION);
+
 try {
-  db.pragma('journal_mode = WAL');
-  db.pragma('foreign_keys = ON');
+  if (isServerless) {
+    db.pragma('journal_mode = MEMORY');
+    db.pragma('synchronous = OFF');
+    db.pragma('temp_store = MEMORY');
+  } else {
+    db.pragma('journal_mode = WAL');
+    db.pragma('foreign_keys = ON');
+  }
 } catch (pragmaErr) {
   console.warn('SQLite pragma notice:', pragmaErr.message);
 }
