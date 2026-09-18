@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, UserPlus, CreditCard, Globe, FileText, MessageSquare, AlertCircle, Pill } from 'lucide-react';
+import { Heart, UserPlus, CreditCard, Globe, FileText, MessageSquare, AlertCircle, Pill, Volume2, VolumeX } from 'lucide-react';
 
 export default function LandingPage() {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const nextMuted = !videoRef.current.muted;
+      videoRef.current.muted = nextMuted;
+      setIsMuted(nextMuted);
+      if (!nextMuted && videoRef.current.paused) {
+        videoRef.current.play().catch(e => console.warn('Audio play notice:', e));
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F9FF] text-[#172B4D]">
       {/* Navbar */}
@@ -45,15 +59,37 @@ export default function LandingPage() {
             </div>
             
             {/* Hero Video */}
-            <div className="relative h-64 sm:h-80 lg:h-96 w-full rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+            <div className="relative h-64 sm:h-80 lg:h-96 w-full rounded-2xl shadow-xl overflow-hidden border border-slate-200 group">
               <video
+                ref={videoRef}
                 className="w-full h-full object-cover"
                 src="/hero-video.MOV"
                 autoPlay
                 loop
-                muted
+                muted={isMuted}
                 playsInline
               />
+
+              {/* Mute / Unmute Button */}
+              <button
+                type="button"
+                onClick={toggleMute}
+                aria-label={isMuted ? "Unmute video sound" : "Mute video sound"}
+                className="absolute bottom-4 right-4 z-10 flex items-center gap-2 bg-black/70 hover:bg-black/85 text-white backdrop-blur-md px-3.5 py-2 rounded-xl text-xs font-semibold shadow-lg border border-white/20 transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer"
+                title={isMuted ? "Click to Unmute Sound" : "Click to Mute Sound"}
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX className="w-4 h-4 text-rose-400" />
+                    <span>Unmute Sound</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-4 h-4 text-emerald-400 animate-pulse" />
+                    <span className="text-emerald-300">Sound On</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
