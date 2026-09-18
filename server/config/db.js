@@ -11,13 +11,17 @@ if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NO
   try {
     if (!fs.existsSync(tmpDbPath)) {
       const candidates = [
-        dbPath,
         path.join(process.cwd(), 'medicard.db'),
-        path.join(__dirname, '..', 'medicard.db')
+        path.join(process.cwd(), 'server', 'medicard.db'),
+        path.join(__dirname, '..', '..', 'medicard.db'),
+        path.join(__dirname, '..', 'medicard.db'),
+        path.join(__dirname, 'medicard.db'),
+        '/var/task/medicard.db'
       ];
       for (const candidate of candidates) {
         if (fs.existsSync(candidate)) {
           fs.copyFileSync(candidate, tmpDbPath);
+          console.log('Copied database to /tmp from:', candidate);
           break;
         }
       }
