@@ -20,7 +20,7 @@ export default function AINurse({
   patientName = 'Patient'
 }) {
   return (
-    <div className="relative w-full h-full min-h-[460px] sm:min-h-[540px] flex flex-col items-center justify-between rounded-3xl bg-gradient-to-b from-[#F0F6FF] via-[#F8FBFF] to-[#EBF4FF] p-4 border border-slate-200/80 shadow-lg overflow-hidden select-none">
+    <div className="relative w-full h-full min-h-[380px] lg:min-h-[540px] flex flex-col items-center justify-between rounded-3xl bg-gradient-to-b from-[#F0F6FF] via-[#F8FBFF] to-[#EBF4FF] p-4 border border-slate-200/80 shadow-lg overflow-hidden select-none">
       
       {/* Top Bar: Nurse Identity & Controls */}
       <div className="w-full flex items-center justify-between z-10 flex-wrap gap-2">
@@ -90,7 +90,7 @@ export default function AINurse({
       />
 
       {/* Gemini Live Animated Voice Orb Circle */}
-      <div className="w-full flex-1 flex items-center justify-center my-auto min-h-[300px] sm:min-h-[380px]">
+      <div className="w-full flex-1 flex items-center justify-center my-auto min-h-[200px] sm:min-h-[280px]">
         <GeminiVoiceOrb 
           state={state}
           isSpeaking={isSpeaking}

@@ -54,6 +54,7 @@ export default function AIChatbot() {
   const [isListening, setIsListening] = useState(false);
   const [voiceError, setVoiceError] = useState('');
   const [emergencyAlert, setEmergencyAlert] = useState(false);
+  const [mobileView, setMobileView] = useState('chat'); // 'chat' | 'voice'
 
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
@@ -440,32 +441,32 @@ export default function AIChatbot() {
       <div className="max-w-7xl mx-auto space-y-4">
         
         {/* Top Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-gradient-to-br from-primary-600 to-teal-600 text-white rounded-2xl shadow-sm">
-              <HeartPulse className="w-6 h-6" />
+            <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary-600 to-teal-600 text-white rounded-2xl shadow-sm shrink-0">
+              <HeartPulse className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-lg sm:text-xl font-extrabold text-darknavy">Medi Card AI Nurse Assistant</h1>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-base sm:text-xl font-extrabold text-darknavy">AI Nurse Assistant</h1>
                 <span className="text-[10px] bg-primary-100 text-primary-800 border border-primary-200 px-2 py-0.5 rounded-full font-mono font-bold">
-                  VOICE & AI INTERACTIVE
+                  AI VOICE
                 </span>
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 hidden sm:block">
                 Connected to authenticated medical records, laboratory parameters & vital indicators
               </p>
             </div>
           </div>
 
-          {/* Language Selector Dropdown */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-darknavy">
-              <Globe className="w-4 h-4 text-primary-600" />
+          {/* Language Selector & Controls */}
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-darknavy">
+              <Globe className="w-3.5 h-3.5 text-primary-600 shrink-0" />
               <select
                 value={selectedLanguage}
                 onChange={(e) => handleLanguageSelect(e.target.value)}
-                className="bg-transparent outline-none font-bold text-darknavy cursor-pointer"
+                className="bg-transparent outline-none font-bold text-darknavy cursor-pointer text-xs"
               >
                 {LANGUAGES.map(lang => (
                   <option key={lang.id} value={lang.id}>
@@ -480,19 +481,39 @@ export default function AIChatbot() {
               onClick={() => {
                 speakText(`Hello ${profile?.name?.split(' ')[0] || 'Patient'}, audio sound is working perfectly! I am your AI Nurse Assistant.`, selectedLanguage);
               }}
-              className="text-xs text-teal-800 hover:text-teal-900 font-bold bg-teal-50 hover:bg-teal-100 px-3 py-2 rounded-xl transition border border-teal-200 flex items-center gap-1.5 shadow-2xs"
+              className="px-2.5 py-1.5 text-xs text-teal-800 hover:text-teal-900 font-bold bg-teal-50 hover:bg-teal-100 rounded-xl transition border border-teal-200 flex items-center gap-1 shadow-2xs shrink-0"
               title="Click to test audio sound"
             >
-              <Volume2 className="w-3.5 h-3.5 text-teal-600" /> Test Sound
-            </button>
-
-            <button
-              onClick={() => setShowLanguageModal(true)}
-              className="text-xs text-primary-700 hover:text-primary-800 font-bold bg-primary-50 hover:bg-primary-100 px-3 py-2 rounded-xl transition border border-primary-200"
-            >
-              Language
+              <Volume2 className="w-3.5 h-3.5 text-teal-600" />
+              <span className="hidden sm:inline">Test Sound</span>
             </button>
           </div>
+        </div>
+
+        {/* Mobile View Switcher (Visible only on mobile/tablet screens < lg) */}
+        <div className="lg:hidden flex items-center justify-center p-1 bg-slate-200/70 rounded-2xl">
+          <button
+            type="button"
+            onClick={() => setMobileView('chat')}
+            className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+              mobileView === 'chat'
+                ? 'bg-white text-primary-700 shadow-sm'
+                : 'text-slate-600 hover:text-darknavy'
+            }`}
+          >
+            💬 Chat Consultation
+          </button>
+          <button
+            type="button"
+            onClick={() => setMobileView('voice')}
+            className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+              mobileView === 'voice'
+                ? 'bg-white text-primary-700 shadow-sm'
+                : 'text-slate-600 hover:text-darknavy'
+            }`}
+          >
+            🎙️ Voice & Nurse Orb
+          </button>
         </div>
 
         {/* Emergency Alert Banner if detected */}
@@ -520,7 +541,7 @@ export default function AIChatbot() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           
           {/* LEFT: 3D Nurse Character Panel (5 Columns on Desktop) */}
-          <div className="lg:col-span-5 h-[280px] sm:h-[380px] lg:h-[620px]">
+          <div className={`lg:col-span-5 ${mobileView === 'voice' ? 'block' : 'hidden lg:block'} h-[480px] sm:h-[520px] lg:h-[620px]`}>
             <AINurse
               state={nurseState}
               speechText={speechBubbleText}
@@ -546,21 +567,52 @@ export default function AIChatbot() {
           </div>
 
           {/* RIGHT: Interactive Clinical Chat Panel (7 Columns on Desktop) */}
-          <div className="lg:col-span-7 flex flex-col h-[500px] sm:h-[580px] lg:h-[620px] bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden">
+          <div className={`lg:col-span-7 ${mobileView === 'chat' ? 'flex' : 'hidden lg:flex'} flex-col h-[calc(100vh-14rem)] min-h-[500px] lg:h-[620px] bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden`}>
             
-            {/* Chat Panel Header */}
-            <div className="p-3.5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-primary-50/40 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs font-bold text-darknavy">Live Clinical Consultation Stream</span>
+            {/* Chat Panel Header with Live Voice Pulse */}
+            <div className="p-3 sm:p-3.5 border-b border-slate-100 bg-gradient-to-r from-slate-50 via-primary-50/30 to-slate-50 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2.5">
+                <div className="relative">
+                  <div className={`w-3 h-3 rounded-full ${
+                    isListening ? 'bg-red-500 animate-ping' : isSpeaking ? 'bg-teal-500 animate-pulse' : 'bg-green-500'
+                  }`} />
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-darknavy block">
+                    {isListening ? '🎙️ Listening to you...' : isSpeaking ? '🔊 Nurse Speaking...' : '👩‍⚕️ AI Nurse Assistant'}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-medium hidden sm:inline">
+                    {LANGUAGES.find(l => l.id === selectedLanguage)?.native || 'English'} • Clinical Guidance Stream
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                <span className="bg-white border border-slate-200 px-2 py-0.5 rounded-md font-mono">
-                  {LANGUAGES.find(l => l.id === selectedLanguage)?.native || 'English'}
-                </span>
-                <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold">
-                  🔒 Data Isolated
-                </span>
+
+              {/* Quick Voice Controls right inside Chat Header */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={toggleVoiceInput}
+                  className={`px-2.5 py-1 rounded-xl transition text-xs flex items-center gap-1 font-bold ${
+                    isListening
+                      ? 'bg-red-100 text-red-700 border border-red-300 animate-pulse'
+                      : 'bg-white text-primary-700 border border-slate-200 hover:bg-primary-50'
+                  }`}
+                  title={isListening ? "Stop voice input" : "Start speaking (Microphone)"}
+                >
+                  <Mic className="w-3.5 h-3.5 text-primary-600" />
+                  <span className="text-[11px]">{isListening ? 'Listening...' : 'Voice'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!isVoiceMuted) window.speechSynthesis?.cancel();
+                    setIsVoiceMuted(!isVoiceMuted);
+                  }}
+                  className="p-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition"
+                  title={isVoiceMuted ? "Unmute nurse voice" : "Mute nurse voice"}
+                >
+                  {isVoiceMuted ? <VolumeX className="w-3.5 h-3.5 text-slate-400" /> : <Volume2 className="w-3.5 h-3.5 text-teal-600" />}
+                </button>
               </div>
             </div>
 

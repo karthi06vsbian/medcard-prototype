@@ -64,10 +64,10 @@ export default function GeminiVoiceOrb({
   const bars = [14, 28, 48, 70, 92, 60, 85, 45, 24, 16];
 
   return (
-    <div className="relative flex flex-col items-center justify-center w-full h-full min-h-[280px] sm:min-h-[340px] select-none py-6">
+    <div className="relative flex flex-col items-center justify-center w-full h-full min-h-[200px] sm:min-h-[300px] select-none py-2 sm:py-6">
       
       {/* Container with fixed aspect ratio */}
-      <div className="relative w-52 h-52 sm:w-64 sm:h-64 flex items-center justify-center">
+      <div className="relative w-44 h-44 sm:w-60 sm:h-60 flex items-center justify-center">
         
         {/* Outermost pulsing ring */}
         <div 
