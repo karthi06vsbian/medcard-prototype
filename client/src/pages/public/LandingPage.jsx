@@ -40,26 +40,28 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-primary-50 via-[#F5F9FF] to-[#F5F9FF] pt-20 pb-32 overflow-hidden">
+      <div className="relative bg-gradient-to-b from-primary-50 via-[#F5F9FF] to-[#F5F9FF] pt-10 pb-16 sm:pt-20 sm:pb-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-            <div className="mb-12 lg:mb-0">
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-[#172B4D] tracking-tight mb-4">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+            <div className="mb-10 lg:mb-0 text-center lg:text-left">
+              <h1 className="text-3xl sm:text-5xl font-extrabold text-[#172B4D] tracking-tight mb-4 leading-tight">
                 Your Health, <span className="text-primary-600">One ID</span>
               </h1>
-              <p className="text-lg text-[#64748B] mb-8 max-w-xl">
+              <p className="text-base sm:text-lg text-[#64748B] mb-8 max-w-xl mx-auto lg:mx-0">
                 A Universal Digital Health Identity platform connecting patients, doctors, pharmacies, and emergency services seamlessly.
               </p>
-              <Link
-                to="/login"
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 shadow-md transition duration-150 ease-in-out"
-              >
-                Get Started
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <Link
+                  to="/login"
+                  className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-xl text-white bg-primary-600 hover:bg-primary-700 shadow-md transition duration-150 ease-in-out active:scale-95"
+                >
+                  Get Started
+                </Link>
+              </div>
             </div>
             
             {/* Hero Video */}
-            <div className="relative h-64 sm:h-80 lg:h-96 w-full rounded-2xl shadow-xl overflow-hidden border border-slate-200 group">
+            <div className="relative h-56 sm:h-80 lg:h-96 w-full max-w-xl mx-auto lg:max-w-none rounded-2xl shadow-xl overflow-hidden border border-slate-200 group">
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
@@ -164,17 +166,17 @@ export default function LandingPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-2 mb-4 md:mb-0">
+      <footer className="bg-white border-t border-slate-200 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+          <div className="flex items-center gap-2">
             <img src="/medicard-icon.png" alt="MediCard Logo" className="h-7 w-7 rounded-lg object-contain" />
             <span className="text-xl font-bold text-[#172B4D]">MediCard</span>
           </div>
-          <p className="text-[#64748B] text-sm">© 2024 MediCard. Built for Smart India Hackathon.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-[#64748B] hover:text-primary-600 text-sm">Privacy Policy</a>
-            <a href="#" className="text-[#64748B] hover:text-primary-600 text-sm">Terms of Service</a>
-            <a href="#" className="text-[#64748B] hover:text-primary-600 text-sm">Contact Support</a>
+          <p className="text-[#64748B] text-xs sm:text-sm">© 2024 MediCard. Built for Smart India Hackathon.</p>
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+            <a href="#" className="text-[#64748B] hover:text-primary-600 text-xs sm:text-sm">Privacy Policy</a>
+            <a href="#" className="text-[#64748B] hover:text-primary-600 text-xs sm:text-sm">Terms of Service</a>
+            <a href="#" className="text-[#64748B] hover:text-primary-600 text-xs sm:text-sm">Contact Support</a>
           </div>
         </div>
       </footer>

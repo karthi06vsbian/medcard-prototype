@@ -520,7 +520,7 @@ export default function AIChatbot() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           
           {/* LEFT: 3D Nurse Character Panel (5 Columns on Desktop) */}
-          <div className="lg:col-span-5 h-[480px] lg:h-[620px]">
+          <div className="lg:col-span-5 h-[280px] sm:h-[380px] lg:h-[620px]">
             <AINurse
               state={nurseState}
               speechText={speechBubbleText}
@@ -546,7 +546,7 @@ export default function AIChatbot() {
           </div>
 
           {/* RIGHT: Interactive Clinical Chat Panel (7 Columns on Desktop) */}
-          <div className="lg:col-span-7 flex flex-col h-[620px] bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden">
+          <div className="lg:col-span-7 flex flex-col h-[500px] sm:h-[580px] lg:h-[620px] bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden">
             
             {/* Chat Panel Header */}
             <div className="p-3.5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-primary-50/40 flex items-center justify-between">

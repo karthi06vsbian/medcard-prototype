@@ -389,7 +389,7 @@ export default function FloatingChatbot() {
     <>
       {/* Floating Button */}
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
           {hasNewMessage && (
             <div className="absolute bottom-full right-0 mb-3 animate-bounce-short">
               <div className="bg-white rounded-2xl rounded-br-sm shadow-xl border border-slate-100 p-3 max-w-[220px] relative">
@@ -406,8 +406,8 @@ export default function FloatingChatbot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className={`fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-5 duration-300 ${isMinimized ? 'w-80' : 'w-[390px]'}`}>
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col" style={{ height: isMinimized ? 'auto' : '580px' }}>
+        <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 animate-in fade-in slide-in-from-bottom-5 duration-300 ${isMinimized ? 'w-72 sm:w-80' : 'w-[calc(100vw-2rem)] max-w-[390px]'}`}>
+          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col" style={{ height: isMinimized ? 'auto' : 'min(580px, calc(100vh - 5rem))' }}>
             
             {/* Header */}
             <div className="bg-gradient-to-r from-primary-700 via-primary-600 to-teal-600 p-3.5 flex items-center gap-3 cursor-pointer select-none shadow-sm" onClick={toggleMinimize}>

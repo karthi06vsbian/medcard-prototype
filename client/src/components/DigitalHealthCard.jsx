@@ -165,14 +165,13 @@ const DigitalHealthCard = ({ patient, onClose }) => {
         </div>
 
         {/* Pure Vector SVG Exact Card Recreation */}
-        <div className="flex justify-center py-2 overflow-x-auto">
+        <div className="flex justify-center py-2">
           <svg
             ref={svgRef}
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             viewBox="0 0 500 300"
-            className="w-[500px] h-[300px] rounded-[24px] shadow-2xl border border-cyan-500/40 flex-shrink-0"
-            style={{ width: '500px', height: '300px' }}
+            className="w-full max-w-[500px] h-auto aspect-[500/300] rounded-[24px] shadow-2xl border border-cyan-500/40 flex-shrink-0"
           >
             <defs>
               {/* Card Dark Gradient */}

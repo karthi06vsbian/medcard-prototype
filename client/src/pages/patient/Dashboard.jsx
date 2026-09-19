@@ -64,12 +64,12 @@ export default function Dashboard() {
         {(() => {
           const healthId = profile?.health_id || user?.health_id || (user?.id ? `SWID-2024-${user.id.toString().padStart(4, '0')}` : 'SWID-2024-0001');
           return (
-            <div className="bg-[#071322] border border-cyan-500/40 rounded-3xl shadow-2xl p-6 sm:p-8 text-white relative overflow-hidden">
+            <div className="bg-[#071322] border border-cyan-500/40 rounded-3xl shadow-2xl p-4 sm:p-7 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                 <QrCode size={180} />
               </div>
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center relative z-10 gap-6">
-                <div className="flex items-start gap-4">
+              <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start relative z-10 gap-6">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left w-full sm:w-auto">
                   {profile?.photo ? (
                     <img
                       src={getPhotoUrl(profile.photo)}
@@ -82,23 +82,23 @@ export default function Dashboard() {
                       <span className="text-[10px] mt-1 font-mono opacity-80">Photo</span>
                     </div>
                   )}
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="text-cyan-400 text-xs font-mono tracking-wider uppercase">BUILD IQ • MEDICARD</p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1.5">
+                      <p className="text-cyan-400 text-[11px] font-mono tracking-wider uppercase">BUILD IQ • MEDICARD</p>
                       <button
                         onClick={() => setShowCardModal(true)}
-                        className="bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 text-[11px] px-2.5 py-0.5 rounded-full border border-cyan-500/40 transition flex items-center gap-1 font-mono shadow-sm"
+                        className="bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 text-[11px] px-2.5 py-0.5 rounded-full border border-cyan-500/40 transition flex items-center gap-1 font-mono shadow-sm active:scale-95"
                         title="View & Download Official Digital Card"
                       >
                         <ExternalLink size={11} /> View Full Card
                       </button>
                     </div>
-                    <h2 className="text-2xl sm:text-3xl font-bold mb-1.5 text-white">{profile?.name || user?.name || 'C. Joseph Vijay'}</h2>
-                    <div className="inline-block bg-[#08242f] border border-teal-500/40 text-cyan-300 rounded-lg px-3 py-1 text-sm sm:text-base tracking-widest font-mono mb-3">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1.5 text-white break-words">{profile?.name || user?.name || 'C. Joseph Vijay'}</h2>
+                    <div className="inline-block bg-[#08242f] border border-teal-500/40 text-cyan-300 rounded-lg px-2.5 py-1 text-xs sm:text-sm tracking-widest font-mono mb-3 max-w-full break-all">
                       {healthId}
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-xs sm:text-sm">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-1.5 text-xs text-left">
                       <div>
                         <span className="text-slate-400">Blood Group:</span>{' '}
                         <span className="font-semibold text-rose-400">{profile?.blood_group || 'B+'}</span>
@@ -115,7 +115,7 @@ export default function Dashboard() {
                         <span className="text-slate-400">Blood Pressure:</span>{' '}
                         <span className="font-semibold text-slate-200">{profile?.blood_pressure || '120/80 mmHg'}</span>
                       </div>
-                      <div className="col-span-2">
+                      <div className="col-span-1 xs:col-span-2 sm:col-span-2">
                         <span className="text-slate-400">Allergies:</span>{' '}
                         <span className="font-semibold text-emerald-300">{profile?.allergies || 'None Reported'}</span>
                       </div>
@@ -125,13 +125,13 @@ export default function Dashboard() {
                 
                 <div 
                   onClick={() => setShowCardModal(true)}
-                  className="mt-2 sm:mt-0 flex flex-col items-center bg-white p-3 rounded-2xl shadow-lg border-2 border-cyan-400 cursor-pointer hover:scale-105 transition-all group"
+                  className="mt-2 sm:mt-0 self-center sm:self-auto flex flex-col items-center bg-white p-3 rounded-2xl shadow-lg border-2 border-cyan-400 cursor-pointer hover:scale-105 transition-all group shrink-0"
                   title="Click to view & download official Digital Health ID"
                 >
-                  <div className="w-32 h-32 bg-white rounded-xl p-1.5 flex items-center justify-center">
+                  <div className="w-28 h-28 sm:w-32 sm:h-32 bg-white rounded-xl p-1.5 flex items-center justify-center">
                     <QRCodeSVG
                       value={healthId}
-                      size={116}
+                      size={104}
                       level="H"
                       includeMargin={false}
                     />

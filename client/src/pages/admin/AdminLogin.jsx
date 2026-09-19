@@ -31,7 +31,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F9FF] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#F5F9FF] flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center mb-3">
           <div className="p-3 bg-slate-100 rounded-2xl border border-slate-200 shadow-xs">
