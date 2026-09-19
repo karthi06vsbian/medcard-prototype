@@ -63,12 +63,15 @@ export default function LandingPage() {
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
-                src="/hero-video.MOV"
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline
-              />
+                preload="metadata"
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+                <source src="/hero-video.MOV" type="video/quicktime" />
+              </video>
 
               {/* Mute / Unmute Button */}
               <button

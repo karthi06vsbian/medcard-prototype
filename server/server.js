@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
+app.use(compression());
 // Safe body parsing for both standalone Express and Vercel serverless runtime
 app.use((req, res, next) => {
   if (req.body && typeof req.body === 'object' && Object.keys(req.body).length > 0) {
